@@ -16,7 +16,6 @@
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
@@ -103,6 +102,11 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
 TARGET_RECOVERY_FSTAB = device/moto/shamu/fstab.shamu
+
+# Ensure f2fstools are built
+ifeq ($(HOST_OS),linux)
+TARGET_USERIMAGES_USE_F2FS := true
+endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/moto/shamu
 
