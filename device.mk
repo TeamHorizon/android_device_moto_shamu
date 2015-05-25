@@ -161,6 +161,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.speaker=false \
     ro.audio.monitorRotation=true
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=1
+
 # Audio effects
 PRODUCT_PACKAGES += \
     libqcomvisualizer \
@@ -247,6 +250,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # LTE, CDMA, GSM/WCDMA
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.force_eri_from_xml=true \
     ro.telephony.default_network=10 \
     ro.telephony.get_imsi_from_sim=true \
     telephony.lteOnCdmaDevice=1
