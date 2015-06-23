@@ -172,3 +172,7 @@
 /sys/devices/platform/kcal_ctrl.0/kcal_min               u:object_r:sysfs_display:s0
 /sys/devices/platform/kcal_ctrl.0/kcal_sat               u:object_r:sysfs_display:s0
 /sys/devices/platform/kcal_ctrl.0/kcal_val               u:object_r:sysfs_display:s0
+
+# CNE
+/dev/socket/cnd                                 u:object_r:cnd_socket:s0
+/system/bin/cnd                                 u:object_r:cnd_exec:s0
