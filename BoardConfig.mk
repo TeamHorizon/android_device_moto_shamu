@@ -140,10 +140,7 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.shamu
 EXTENDED_FONT_FOOTPRINT := true
 
 # CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen   \
-    device/moto/shamu/cmhw
+BOARD_HARDWARE_CLASS := device/moto/shamu/cmhw
 
 USE_CLANG_PLATFORM_BUILD := true
 
