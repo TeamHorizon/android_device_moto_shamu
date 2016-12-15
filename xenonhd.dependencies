@@ -1,0 +1,12 @@
+[
+  {
+    "repository": "CyanogenMod/android_kernel_moto_shamu",
+    "target_path": "kernel/moto/shamu",
+	"branch": "cm-14.1"
+  },
+  {
+    "repository": "TeamHorizon/proprietary_vendor_motorola",
+    "target_path": "vendor/motorola",
+    "branch": "n"
+  }
+]
