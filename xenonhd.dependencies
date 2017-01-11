@@ -1,6 +1,6 @@
 [
   {
-    "repository": "CyanogenMod/android_kernel_moto_shamu",
+    "repository": "LineageOS/android_kernel_moto_shamu",
     "target_path": "kernel/moto/shamu",
 	"branch": "cm-14.1"
   },
