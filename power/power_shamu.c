@@ -41,6 +41,8 @@
 #define STATE_HDR_OFF "state=3"
 #define MAX_LENGTH         50
 #define BOOST_SOCKET       "/dev/socket/mpdecision/pb"
+#define HIGH_BRIGHTNESS_MODE_PATH       "/sys/devices/virtual/graphics/fb0/hbm"
+#define POWER_FEATURE_HIGH_BRIGHTNESS_MODE    1   // this must be the same as what is being passed from the rom's powerhal
 #define WAKE_GESTURE_PATH "/sys/bus/i2c/devices/1-004a/tsp"
 static int client_sockfd;
 static struct sockaddr_un client_addr;
@@ -284,6 +286,15 @@ static void set_feature(struct power_module *module __unused, feature_t feature,
     switch (feature) {
     case POWER_FEATURE_DOUBLE_TAP_TO_WAKE:
         sysfs_write(WAKE_GESTURE_PATH, state ? "AUTO" : "OFF");
+        break;
+    default:
+        ALOGW("Error setting the feature, it doesn't exist %d\n", feature);
+        break;
+    }
+
+	 switch (feature) {
+    case POWER_FEATURE_HIGH_BRIGHTNESS_MODE:
+        sysfs_write(HIGH_BRIGHTNESS_MODE_PATH, state ? "1" : "0");
         break;
     default:
         ALOGW("Error setting the feature, it doesn't exist %d\n", feature);

@@ -79,6 +79,9 @@ on post-fs-data
 
     mkdir /persist/mdm 0770 radio radio
 
+	# High Brightness Mode
+    chown system system /sys/devices/virtual/graphics/fb0/hbm
+
     #Subsystem RAM-dumps
     mkdir /data/ss-ram-dumps 0750 radio log
     mkdir /data/ss-ram-dumps/bp-dumps 0750 radio log
