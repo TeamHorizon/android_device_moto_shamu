@@ -37,8 +37,6 @@
 
 #define STATE_ON "state=1"
 #define STATE_OFF "state=0"
-#define STATE_HDR_ON "state=2"
-#define STATE_HDR_OFF "state=3"
 #define MAX_LENGTH         50
 #define BOOST_SOCKET       "/dev/socket/mpdecision/pb"
 #define HIGH_BRIGHTNESS_MODE_PATH       "/sys/devices/virtual/graphics/fb0/hbm"
@@ -140,21 +138,15 @@ static void process_video_encode_hint(void *metadata)
         return;
     }
 
-    if (metadata) {
-        if (!strncmp(metadata, STATE_ON, sizeof(STATE_ON))) {
-            /* Video encode started */
-            enc_boost(1);
-        } else if (!strncmp(metadata, STATE_OFF, sizeof(STATE_OFF))) {
-            /* Video encode stopped */
-            enc_boost(0);
-        }  else if (!strncmp(metadata, STATE_HDR_ON, sizeof(STATE_HDR_ON))) {
-            /* HDR usecase started */
-        } else if (!strncmp(metadata, STATE_HDR_OFF, sizeof(STATE_HDR_OFF))) {
-            /* HDR usecase stopped */
-        }else
-            return;
-    } else {
+    if (!metadata)
         return;
+
+    if (!strncmp(metadata, STATE_ON, sizeof(STATE_ON))) {
+        /* Video encode started */
+        enc_boost(1);
+    } else if (!strncmp(metadata, STATE_OFF, sizeof(STATE_OFF))) {
+        /* Video encode stopped */
+        enc_boost(0);
     }
 }
 
@@ -214,14 +206,10 @@ static void power_set_interactive(__attribute__((unused)) struct power_module *m
     if (current_power_profile != PROFILE_BALANCED)
         return;
 
-    if (last_state == -1) {
-        last_state = on;
-    } else {
-        if (last_state == on)
-            return;
-        else
-            last_state = on;
-    }
+    if (last_state == on)
+        return;
+
+    last_state = on;
 
     ALOGV("%s %s", __func__, (on ? "ON" : "OFF"));
     if (on) {
@@ -321,11 +309,6 @@ static void power_hint( __attribute__((unused)) struct power_module *module,
             ALOGV("POWER_HINT_INTERACTION");
             touch_boost();
             break;
-#if 0
-        case POWER_HINT_VSYNC:
-            ALOGV("POWER_HINT_VSYNC %s", (data ? "ON" : "OFF"));
-            break;
-#endif
         case POWER_HINT_VIDEO_ENCODE:
             if (current_power_profile != PROFILE_BALANCED)
                 return;
