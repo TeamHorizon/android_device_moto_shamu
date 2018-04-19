@@ -1,0 +1,12 @@
+[
+  {
+    "repository": "TeamHorizon/android_kernel_moto_shamu",
+    "target_path": "kernel/moto/shamu",
+	  "branch": "o"
+  },
+  {
+    "repository": "proprietary_vendor_motorola",
+    "target_path": "vendor/motorola",
+    "branch": "o"
+  }
+]
